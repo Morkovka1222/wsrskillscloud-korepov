@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  tasks:
+  - name: update repo
+    apt: update_cache=true force_apt_get=true
+  - name: install curl
+    apt: name=curl force_apt_get=true state=latest
+  - name: setting ufw
+    ufw: state=enabled rule=allow port='80,8080,1834' proto=tcp
